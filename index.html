@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Refleksi Perasaan Ika 💜</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    color: #302747;
+    background: linear-gradient(135deg, #faf4ff, #ecebff);
+}
+
+.card {
+    width: 100%;
+    max-width: 520px;
+    padding: 28px;
+    background: white;
+    border-radius: 23px;
+    box-shadow: 0 12px 40px rgba(73,49,109,.12);
+}
+
+.badge {
+    display: inline-block;
+    background: #f1e5ff;
+    color: #8350c8;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 28px;
+    margin: 18px 0 10px;
+}
+
+p {
+    color: #756d82;
+    line-height: 1.65;
+    font-size: 14px;
+}
+
+.question {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: bold;
+    margin: 25px 0 16px;
+}
+
+.option {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border: 1px solid #e7dff0;
+    border-radius: 13px;
+    padding: 14px;
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.option:hover {
+    background: #fcf9ff;
+    border-color: #aa85df;
+}
+
+input[type="radio"] {
+    accent-color: #8956d6;
+    margin-top: 4px;
+}
+
+button, .send {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 12px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+button {
+    background: #8956d6;
+    color: white;
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.send {
+    background: #248c54;
+    color: white;
+}
+
+.result {
+    display: none;
+    border-top: 1px solid #eee4f8;
+    margin-top: 24px;
+    padding-top: 20px;
+}
+
+.notice {
+    background: #f8f3ff;
+    padding: 13px;
+    border-radius: 12px;
+    color: #65567b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 11px;
+    color: #a098ad;
+}
+</style>
+</head>
+
+<body>
+
+<main class="card">
+
+    <span class="badge">RUANG REFLEKSI 💜</span>
+
+    <h1>Ika, yuk kenali perasaanmu</h1>
+
+    <p>
+        Jawab satu pertanyaan ringan tentang hubunganmu.
+        Kalau ingin membagikan jawabanmu, kamu bisa
+        mengirimkannya melalui WhatsApp.
+    </p>
+
+    <div class="question">
+        Kalau hubungan yang Ika jalani mulai terasa
+        berbeda atau kehilangan spark, apa yang paling
+        menggambarkan perasaan Ika saat ini?
+    </div>
+
+    <form id="quiz">
+
+        <label class="option">
+            <input type="radio" name="jawaban" value="A">
+            <span>
+                <b>A.</b> Aku masih sayang, tapi hubungan terasa
+                biasa saja dan aku ingin tahu apakah perasaan
+                itu bisa tumbuh lagi.
+            </span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="jawaban" value="B">
+            <span>
+                <b>B.</b> Aku sering overthinking, takut kehilangan,
+                atau memikirkan hubungan ini terus-menerus.
+            </span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="jawaban" value="C">
+            <span>
+                <b>C.</b> Aku bingung dengan perasaanku sendiri;
+                kadang ingin dekat, kadang ingin punya jarak.
+            </span>
+        </label>
+
+        <label class="option">
+            <input type="radio" name="jawaban" value="D">
+            <span>
+                <b>D.</b> Aku merasa lelah atau tertekan sampai
+                mulai mengganggu tidur, makan, atau aktivitas
+                sehari-hari.
+            </span>
+        </label>
+
+        <button type="submit" id="submit" disabled>
+            Lihat Refleksi
+        </button>
+
+    </form>
+
+    <section class="result" id="result">
+
+        <h2>Refleksi untuk Ika 💜</h2>
+
+        <p id="hasil"></p>
+
+        <div class="notice">
+            <b>Catatan:</b> Ini bukan tes klinis dan tidak
+            dapat mendiagnosis penyakit mental. Jawaban
+            merupakan informasi pribadi. Ika bebas memilih
+            apakah ingin membagikannya.
+        </div>
+
+        <a id="send" class="send" href="#" target="_blank"
+           rel="noopener">
+            Bagikan Jawabanku lewat WhatsApp
+        </a>
+
+        <button type="button" onclick="location.reload()">
+            Ulangi Pertanyaan
+        </button>
+
+    </section>
+
+    <div class="footer">
+        Jawaban tidak dikirim otomatis atau disimpan di server.
+    </div>
+
+</main>
+
+<script>
+const form = document.getElementById("quiz");
+const submit = document.getElementById("submit");
+
+form.addEventListener("change", function() {
+    submit.disabled = !document.querySelector(
+        'input[name="jawaban"]:checked'
+    );
+});
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const jawaban = document.querySelector(
+        'input[name="jawaban"]:checked'
+    ).value;
+
+    const pesan = {
+        A: "Ika mungkin masih punya rasa sayang, tetapi merindukan kedekatan atau antusiasme yang dulu ada. Coba pikirkan apa yang Ika butuhkan dan bicarakan secara jujur.",
+
+        B: "Ika mungkin sedang merasa cemas atau terjebak dalam pikiran berulang tentang hubungan. Coba ambil jeda dan bicarakan perasaan itu dengan orang tepercaya. Ini tidak otomatis berarti ada gangguan mental.",
+
+        C: "Perasaan campur aduk bisa terjadi saat hubungan berubah. Beri diri sendiri waktu untuk memahami apakah Ika membutuhkan komunikasi, kedekatan, atau ruang pribadi.",
+
+        D: "Keadaan ini mungkin terasa berat. Ika tidak harus menghadapinya sendirian. Cari dukungan dari orang tepercaya. Jika aktivitas terus terganggu, pertimbangkan berkonsultasi dengan psikolog."
+    };
+
+    const label = {
+        A: "A — masih sayang, tetapi hubungan terasa biasa saja",
+        B: "B — sering overthinking atau takut kehilangan",
+        C: "C — bingung, kadang ingin dekat kadang ingin menjauh",
+        D: "D — merasa tertekan sampai aktivitas terganggu"
+    };
+
+    document.getElementById("hasil").textContent =
+        pesan[jawaban];
+
+    const nomorWhatsApp = "6281216358213";
+
+    const isiPesan =
+        "Hai, aku Ika. Aku mengisi refleksi perasaan ini secara sukarela.\n\n" +
+        "Jawabanku: " + label[jawaban] + ".\n\n" +
+        "Hasil refleksi: " + pesan[jawaban] +
+        "\n\nAku memilih membagikan hasil ini.";
+
+    document.getElementById("send").href =
+        "https://wa.me/" + nomorWhatsApp +
+        "?text=" + encodeURIComponent(isiPesan);
+
+    document.getElementById("result").style.display = "block";
+    submit.style.display = "none";
+
+    document.getElementById("result").scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
+});
+</script>
+
+</body>
+</html>
